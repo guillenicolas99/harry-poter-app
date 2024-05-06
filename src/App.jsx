@@ -21,7 +21,8 @@ function App() {
     ? characters.filter(character => character.hogwartsHouse.toLowerCase().includes('gryffindor'))
     : characters
 
-    if(isLoading) return <h2 className='loading'>LOADING...</h2>
+    if(isLoading) return <div className="loader"></div>
+
 
     // if(filtering.length == 0) return <h2 className='loading'>Cant Load Characters...</h2>
 
@@ -36,7 +37,7 @@ function App() {
         filteredGryffindor.map(singleCharacter => {
           return (
           <article className='characters' key={singleCharacter.index}>
-            <img src={singleCharacter.image} alt={singleCharacter.fullName} />
+            <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
             <p>{singleCharacter.fullName} - <small>{singleCharacter.nickname}</small></p>
             <small>{singleCharacter.hogwartsHouse}</small>
           </article>)
