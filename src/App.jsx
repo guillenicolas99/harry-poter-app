@@ -24,7 +24,12 @@ function App() {
     if(isLoading) return <div className="loader"></div>
 
 
-    // if(filtering.length == 0) return <h2 className='loading'>Cant Load Characters...</h2>
+    if(filteredGryffindor.length == 0) {
+      return <div className='loading'>
+        <h2>Cant Load Characters...</h2>
+        <a href='/'>Reload</a>
+    </div>
+    }
 
   return (
     <>
@@ -37,7 +42,9 @@ function App() {
         filteredGryffindor.map(singleCharacter => {
           return (
           <article className='characters' key={singleCharacter.index}>
-            <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
+            <figure>
+              <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
+            </figure>
             <p>{singleCharacter.fullName} - <small>{singleCharacter.nickname}</small></p>
             <small>{singleCharacter.hogwartsHouse}</small>
           </article>)
