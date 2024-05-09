@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import MainMenu from './components/MainMenu'
+import DangerAlert from './components/DangerAlert'
+import { Button } from "flowbite-react";
+
 
 function App() {
   const [characters, setCharacters] = useState([])
@@ -21,36 +25,39 @@ function App() {
     ? characters.filter(character => character.hogwartsHouse.toLowerCase().includes('gryffindor'))
     : characters
 
-    if(isLoading) return <div className="loader"></div>
-
+    if(isLoading) return <div className='loader'></div>
 
     if(filteredGryffindor.length == 0) {
-      return <div className='loading'>
-        <h2>Cant Load Characters...</h2>
-        <a href='/'>Reload</a>
-    </div>
+      return <DangerAlert>
+        Cant Load Characters
+        <a color='failure' className='text-3xl' href='/'>Reload</a>
+      </DangerAlert>
     }
 
   return (
     <>
-    <section className='filter-menu'>
-      <button onClick={() => setFiltering(!filtering)}>{filtering ? 'No filtrar por Gryffindor' : 'Filtrar por Gryffindor'}</button>
-    </section>
-      <h2>Total: {filteredGryffindor.length}</h2>
-    <section className='row-characters'>
-      {
-        filteredGryffindor.map(singleCharacter => {
-          return (
-          <article className='characters' key={singleCharacter.index}>
-            <figure>
-              <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
-            </figure>
-            <p>{singleCharacter.fullName} - <small>{singleCharacter.nickname}</small></p>
-            <small>{singleCharacter.hogwartsHouse}</small>
-          </article>)
-        })
-      }
-    </section>
+      <MainMenu />
+      <main>
+        <section>
+          <div className='filter-menu'>
+            <Button onClick={() => setFiltering(!filtering)}>{filtering ? 'No filtrar por Gryffindor' : 'Filtrar por Gryffindor'}</Button>
+          </div>
+          <div className='row-characters'>
+            {
+              filteredGryffindor.map(singleCharacter => {
+                return (
+                <article className='characters' key={singleCharacter.index}>
+                  <figure>
+                    <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
+                  </figure>
+                  <p className='amatic-sc-regular'>{singleCharacter.fullName} - <small>{singleCharacter.nickname}</small></p>
+                  <small>{singleCharacter.hogwartsHouse}</small>
+                </article>)
+              })
+            }
+          </div>
+        </section>
+      </main>
     </>
   )
 }

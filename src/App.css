@@ -1,7 +1,4 @@
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
     text-align: center;
 }
 
@@ -9,10 +6,20 @@ body {
     background-image: url(../public/img/bg/bg.webp);
     background-size: 100%;
     min-height: 1400px;
-    padding: 9vw 0;
     background-color: #171e1d;
     background-position: top;
     background-repeat: no-repeat;
+    font-family: "Amatic SC", sans-serif;
+}
+
+main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+p {
+    font-size: 18px;
 }
 
 .filter-menu {
