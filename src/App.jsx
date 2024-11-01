@@ -21,6 +21,8 @@ function App() {
     .finally(() => setLoading(false))
   }, [])
 
+  console.log(characters)
+
   const filteredGryffindor = filtering
     ? characters.filter(character => character.hogwartsHouse.toLowerCase().includes('gryffindor'))
     : characters
@@ -42,16 +44,16 @@ function App() {
           <div className='filter-menu'>
             <Button onClick={() => setFiltering(!filtering)}>{filtering ? 'No filtrar por Gryffindor' : 'Filtrar por Gryffindor'}</Button>
           </div>
-          <div className='row-characters'>
+          <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3'>
             {
               filteredGryffindor.map(singleCharacter => {
                 return (
-                <article className='characters' key={singleCharacter.index}>
-                  <figure>
+                <article className='characters shadow-md bg-slate-950 hover:bg-slate-800 transition-all rounded-md' key={singleCharacter.index}>
+                  <figure className='rounded-md overflow-hidden'>
                     <img src={singleCharacter.image} alt={singleCharacter.fullName} loading='lazy' />
                   </figure>
-                  <p className='amatic-sc-regular'>{singleCharacter.fullName} - <small>{singleCharacter.nickname}</small></p>
-                  <small>{singleCharacter.hogwartsHouse}</small>
+                  <p className='amatic-sc-regular text-3xl'>{singleCharacter.fullName} - <small>({singleCharacter.nickname})</small></p>
+                  <small className='text-xl'>{singleCharacter.hogwartsHouse}</small>
                 </article>)
               })
             }
